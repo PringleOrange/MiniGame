@@ -6,6 +6,8 @@ public class Geem extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        this.getCommand("test").setExecutor(new CommandHandler());
+
         getLogger().info("Geem!");
     }
 
