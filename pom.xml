@@ -19,16 +19,21 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.17-R0.1-SNAPSHOT</version>
+            <version>1.17.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>spigot</artifactId>
-            <version>1.16.4</version>
-            <scope>system</scope>
-            <systemPath>/home/micha4w/.m2/repository/org/bukkit/spigot/1.16.4/spigot-1.16.4.jar</systemPath>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.bukkit</groupId>-->
+<!--            <artifactId>spigot</artifactId>-->
+<!--            <version>1.16.4</version>-->
+<!--            <scope>system</scope>-->
+<!--            <systemPath>/home/micha4w/.m2/repository/org/bukkit/spigot/1.16.4/spigot-1.16.4.jar</systemPath>-->
+<!--        </dependency>-->
     </dependencies>
 
     <!--    <properties>-->
