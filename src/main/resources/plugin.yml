@@ -1,0 +1,17 @@
+name: Geem
+version: 1.11.1
+main: com.github.micha4w.Geem
+author: micha4w
+description: Geem, that's all
+api-version: 1.17
+commands:
+  test:
+    description: Don't use this
+    usage: /test <confirmation>
+    permission: geem.AllowAll
+
+
+permissions:
+  geem.AllowAll:
+    description: Allows a player to do everything
+    default: op
