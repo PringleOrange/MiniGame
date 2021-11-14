@@ -76,16 +76,33 @@ public class CommandHandler implements CommandExecutor {
             switch ( args[0] ) {
                 case "r":
                     Teams.RED.players.add(Bukkit.getPlayer(args[1]));
+                    sender.sendMessage("Played added to team RED");
                     break;
                 case "g":
                     Teams.GREEN.players.add(Bukkit.getPlayer(args[1]));
+                    sender.sendMessage("Played added to team GREEN");
                     break;
                 case "b":
                     Teams.BLUE.players.add(Bukkit.getPlayer(args[1]));
+                    sender.sendMessage("Played added to team BLUE");
                     break;
                 case "y":
                     Teams.YELLOW.players.add(Bukkit.getPlayer(args[1]));
+                    sender.sendMessage("Played added to team YELLOW");
                     break;
+            }
+
+            return true;
+        } else if ( command.getLabel().equalsIgnoreCase("removeplayer") ) {
+            if ( args.length != 1 ) return false;
+
+            Player player = Bukkit.getPlayer(args[0]);
+            Teams team = Teams.getTeam(player);
+            if ( team == null ) {
+                sender.sendMessage("Player is not in a team");
+            } else {
+                team.removePlayer(player);
+                sender.sendMessage("Played removed");
             }
 
             return true;

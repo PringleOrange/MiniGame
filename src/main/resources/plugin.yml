@@ -20,6 +20,11 @@ commands:
     usage: /addplayer <r/g/b/y> <player>
     permission: op
 
+  removeplayer:
+    description: remove a player from a game
+    usage: /removeplayer <player>
+    permission: op
+
 permissions:
   geem.AllowAll:
     description: Allows a player to do everything
