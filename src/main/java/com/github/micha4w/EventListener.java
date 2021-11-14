@@ -56,6 +56,12 @@ public class EventListener implements Listener {
                 team.score += 1;
                 if ( team.score > 10 ) {
                     Bukkit.broadcastMessage("Team " + team.toString().toLowerCase() + " has won!");
+
+                    for ( Teams team2 : Teams.values() ) {
+                        for ( Player player2 : team2.players ) {
+                            team2.removePlayer(player2);
+                        }
+                    }
                 }
 
                 event.setDropItems(false);

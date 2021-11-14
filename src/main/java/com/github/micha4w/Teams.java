@@ -31,6 +31,7 @@ public enum Teams {
         this.color = color;
 
         this.baseBlock = baseBlock;
+        this.treasureBlock = treasureBlock;
     }
 
     public static void innit() {

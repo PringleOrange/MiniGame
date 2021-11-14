@@ -43,6 +43,7 @@ public class CommandHandler implements CommandExecutor {
 
             world.getWorldBorder().setSize(256);
             world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
+            world.setGameRule(GameRule.KEEP_INVENTORY, true );
 //            world.setGameRule(GameRule.RANDOM_TICK_SPEED, 0);
             world.setTime(6000);
 
