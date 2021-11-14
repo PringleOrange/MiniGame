@@ -17,6 +17,9 @@ public enum Teams {
     int chunkX;
     int chunkZ;
 
+    int treasureX;
+    int treasureZ;
+
     int score = 0;
 
     Material baseBlock;
@@ -48,6 +51,15 @@ public enum Teams {
             }
         }
         return null;
+    }
+
+    public static void endGame() {
+        for ( Teams team : Teams.values() ) {
+            team.score = 0;
+            for ( Player player : team.players ) {
+                team.removePlayer(player);
+            }
+        }
     }
 
     public boolean isBaseChunk(int chunkX, int chunkZ) {
