@@ -58,6 +58,7 @@ public enum Teams {
         player.setPlayerListName(color + player.getDisplayName());
 
         player.teleport(this.getSpawn());
+        player.setBedSpawnLocation(this.getSpawn(), true);
     }
 
     public Location getSpawn() {
@@ -68,6 +69,6 @@ public enum Teams {
         players.remove(player);
 
         player.setDisplayName( player.getDisplayName().substring(color.toString().length()) );
-        player.setPlayerListName( player.getDisplayName().substring(color.toString().length()) );
+        player.setPlayerListName( player.getDisplayName() );
     }
 }
