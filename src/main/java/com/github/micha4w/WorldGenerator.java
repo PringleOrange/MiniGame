@@ -19,13 +19,27 @@ public class WorldGenerator extends ChunkGenerator {
         // Set the Bedrock Floor
         chunk.setRegion(0, 0, 0, 16, 1, 16, Material.BEDROCK);
 
-        // Exclude 4 Border Chunks
-        if ( (chunkX == -8 ?1:0) + (chunkX == 7 ?1:0) + (chunkZ == -8 ?1:0) + (chunkZ == 7 ?1:0) == 2 ) {
-            return;
-        }
+        // Set Colors for Bases
+        if ( Bases.GREEN.sameAs(chunkX, chunkZ) ) {
+            chunk.setRegion(1, 0, 0, 16, 2, 16, Material.GREEN_CONCRETE);
+            chunk.setRegion(255, 0, 0, 16, 256, 16, Material.GREEN_STAINED_GLASS);
 
-        // Set Everything to Dirt
-        chunk.setRegion(0, 0, 0, 16, 256, 16, Material.DIRT);
+        } else if ( Bases.BLUE.sameAs(chunkX, chunkZ) ) {
+            chunk.setRegion(1, 0, 0, 16, 2, 16, Material.BLUE_CONCRETE);
+            chunk.setRegion(255, 0, 0, 16, 256, 16, Material.BLUE_STAINED_GLASS);
+
+        } else if ( Bases.YELLOW.sameAs(chunkX, chunkZ) ) {
+            chunk.setRegion(1, 0, 0, 16, 2, 16, Material.YELLOW_CONCRETE);
+            chunk.setRegion(255, 0, 0, 16, 256, 16, Material.YELLOW_STAINED_GLASS);
+
+        } else if ( Bases.RED.sameAs(chunkX, chunkZ) ) {
+            chunk.setRegion(1, 0, 0, 16, 2, 16, Material.RED_CONCRETE);
+            chunk.setRegion(255, 0, 0, 16, 256, 16, Material.RED_STAINED_GLASS);
+
+        } else {
+            // Set Everything to Dirt
+            chunk.setRegion(0, 0, 0, 16, 256, 16, Material.DIRT);
+        }
     }
 
     public void generateCaves(WorldInfo worldInfo, Random random, int chunkX, int chunkZ, ChunkData chunkData) {

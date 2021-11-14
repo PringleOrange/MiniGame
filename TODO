@@ -8,3 +8,9 @@ I need you to:
 When you kill another player, a block of wool corresponding to your color will be spawn to the opposite site of the player you've just killed. Each corner can contain only one block of wool at a time and the block can only be interacted by the player of corresponding color. The first to get ten points wins.
 
 If a player you've attacked dies within 30 seconds after receiving damage from you and nobody else, you're rewarded.
+
+
+-       +
+Blue    Red     +
+
+Green   Yellow  -
