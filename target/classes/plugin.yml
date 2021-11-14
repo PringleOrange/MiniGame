@@ -8,24 +8,24 @@ commands:
   test:
     description: Don't use this
     usage: /test <confirmation>
-    permission: geem.AllowAll
+    permission: geem.allowall
 
   updategeem:
     description: Grab Update from Github
     usage: /updategeem
-    permission: op
+    permission: geem.allowall
 
   addplayer:
     description: add a player to a game
     usage: /addplayer <r/g/b/y> <player>
-    permission: op
+    permission: geem.allowall
 
   removeplayer:
     description: remove a player from a game
     usage: /removeplayer <player>
-    permission: op
+    permission: geem.allowall
 
 permissions:
-  geem.AllowAll:
+  geem.allowall:
     description: Allows a player to do everything
     default: op

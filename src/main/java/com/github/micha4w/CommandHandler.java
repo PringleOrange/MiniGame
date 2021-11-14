@@ -32,8 +32,6 @@ public class CommandHandler implements CommandExecutor {
                 } catch ( IOException e ) { e.printStackTrace(); }
             }
 
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "reload confirm");
-
             WorldCreator wc = new WorldCreator("test2");
             wc.generator(new WorldGenerator());
 
@@ -73,21 +71,27 @@ public class CommandHandler implements CommandExecutor {
         } else if ( command.getLabel().equalsIgnoreCase("addplayer") ) {
             if ( args.length != 2 ) return false;
 
+            Player player = Bukkit.getPlayer(args[1]);
+            if ( Teams.getTeam(player) != null ) {
+                sender.sendMessage("Player is already in a team");
+                return true;
+            }
+
             switch ( args[0] ) {
                 case "r":
-                    Teams.RED.addPlayer(Bukkit.getPlayer(args[1]));
+                    Teams.RED.addPlayer(player);
                     sender.sendMessage("Played added to team RED");
                     break;
                 case "g":
-                    Teams.GREEN.addPlayer(Bukkit.getPlayer(args[1]));
+                    Teams.GREEN.addPlayer(player);
                     sender.sendMessage("Played added to team GREEN");
                     break;
                 case "b":
-                    Teams.BLUE.addPlayer(Bukkit.getPlayer(args[1]));
+                    Teams.BLUE.addPlayer(player);
                     sender.sendMessage("Played added to team BLUE");
                     break;
                 case "y":
-                    Teams.YELLOW.addPlayer(Bukkit.getPlayer(args[1]));
+                    Teams.YELLOW.addPlayer(player);
                     sender.sendMessage("Played added to team YELLOW");
                     break;
             }

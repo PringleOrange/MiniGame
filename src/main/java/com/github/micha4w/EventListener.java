@@ -49,9 +49,9 @@ public class EventListener implements Listener {
     public void onBlockMine (BlockBreakEvent event) {
         Player player = event.getPlayer();
         Teams team = Teams.getTeam(player);
-        player.sendMessage(event.getBlock().getType() + " " + team);
 
         if ( team != null ) {
+            player.sendMessage(event.getBlock().getType() + " " + team.treasureBlock + " " + team.score);
             if ( event.getBlock().getType() == team.treasureBlock ) {
                 team.score += 1;
                 if ( team.score > 10 ) {

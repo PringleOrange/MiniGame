@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Teams {
-    GREEN(-8, -8, ChatColor.GREEN, Material.GREEN_WOOL, Material.GREEN_STAINED_GLASS, Material.GREEN_WOOL),
-    YELLOW(7, -8, ChatColor.YELLOW, Material.YELLOW_WOOL, Material.YELLOW_STAINED_GLASS, Material.YELLOW_WOOL),
-    BLUE(-8, 7, ChatColor.BLUE, Material.BLUE_WOOL, Material.BLUE_STAINED_GLASS, Material.BLUE_WOOL),
-    RED(7, 7, ChatColor.RED, Material.RED_WOOL, Material.RED_STAINED_GLASS, Material.RED_WOOL);
+    GREEN(-8, -8, ChatColor.GREEN, Material.GREEN_CONCRETE, Material.GREEN_STAINED_GLASS),
+    YELLOW(7, -8, ChatColor.YELLOW, Material.YELLOW_CONCRETE, Material.YELLOW_STAINED_GLASS),
+    BLUE(-8, 7, ChatColor.BLUE, Material.BLUE_CONCRETE, Material.BLUE_STAINED_GLASS),
+    RED(7, 7, ChatColor.RED, Material.RED_CONCRETE, Material.RED_STAINED_GLASS);
 
     static final World world = Bukkit.getWorld("test2");
 
@@ -20,19 +20,17 @@ public enum Teams {
     int score = 0;
 
     Material baseBlock;
-    Material roofBlock;
     Material treasureBlock;
     ChatColor color;
     List<Player> players = new ArrayList<>();
     Teams opposite;
 
-    Teams(int chunkX, int chunkZ, ChatColor color, Material baseBlock, Material roofBlock, Material treasureBlock) {
+    Teams(int chunkX, int chunkZ, ChatColor color, Material baseBlock, Material treasureBlock) {
         this.chunkX = chunkX;
         this.chunkZ = chunkZ;
         this.color = color;
 
         this.baseBlock = baseBlock;
-        this.roofBlock = roofBlock;
     }
 
     public static void innit() {
@@ -51,7 +49,7 @@ public enum Teams {
         return null;
     }
 
-    public boolean sameAs (int chunkX, int chunkZ) {
+    public boolean isBaseChunk(int chunkX, int chunkZ) {
         return this.chunkX == chunkX && this.chunkZ == chunkZ;
     }
 

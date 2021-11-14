@@ -17,18 +17,18 @@ public class WorldGenerator extends ChunkGenerator {
 
         // Set the Bedrock Floor
         chunk.setRegion(0, 0, 0, 16, 1, 16, Material.BEDROCK);
+        chunk.setRegion(0, 255, 0, 16, 256, 16, Material.BEDROCK);
 
         // Set Colors for Bases
         for ( Teams team : Teams.values() ) {
-            if ( team.sameAs(chunkX, chunkZ) ) {
-                chunk.setRegion(0, 0, 0, 16, 2, 16, team.baseBlock);
-                chunk.setRegion(0, 255, 0, 16, 256, 16, team.roofBlock);
+            if ( team.isBaseChunk(chunkX, chunkZ) ) {
+                chunk.setRegion(0, 1, 0, 16, 2, 16, team.baseBlock);
                 return;
             }
         }
 
         // Set Everything to Dirt
-        chunk.setRegion(0, 0, 0, 16, 256, 16, Material.DIRT);
+        chunk.setRegion(0, 1, 0, 16, 255, 16, Material.DIRT);
     }
 
     public void generateCaves(WorldInfo worldInfo, Random random, int chunkX, int chunkZ, ChunkData chunkData) {
