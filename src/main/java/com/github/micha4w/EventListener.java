@@ -31,7 +31,7 @@ public class EventListener implements Listener {
                                                 16 * killedTeam.opposite.chunkZ + Math.abs(killerTeam.chunkZ)
                                             ).getBlock();
 
-                block.setType(killerTeam.baseBlock);
+                block.setType(killerTeam.treasureBlock);
             }
         }
     }
@@ -52,10 +52,20 @@ public class EventListener implements Listener {
         player.sendMessage(event.getBlock().getType() + " " + team);
 
         if ( team != null ) {
+            if ( event.getBlock().getType() == team.treasureBlock ) {
+                team.score += 1;
+                if ( team.score > 10 ) {
+                    Bukkit.broadcastMessage("Team " + team.toString().toLowerCase() + " has won!");
+                }
+
+                event.setDropItems(false);
+                return;
+            }
+
             for ( Teams otherTeam : Teams.values() ) {
                 if ( otherTeam == team ) continue;
 
-                if ( event.getBlock().getType() == otherTeam.baseBlock ) {
+                if ( event.getBlock().getType() == otherTeam.treasureBlock ) {
                     event.setCancelled(true);
                     return;
                 }
