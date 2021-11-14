@@ -21,20 +21,20 @@ public class WorldGenerator extends ChunkGenerator {
 
         // Set Colors for Bases
         if ( Bases.GREEN.sameAs(chunkX, chunkZ) ) {
-            chunk.setRegion(1, 0, 0, 16, 2, 16, Material.GREEN_CONCRETE);
-            chunk.setRegion(255, 0, 0, 16, 256, 16, Material.GREEN_STAINED_GLASS);
+            chunk.setRegion(0, 0, 0, 16, 2, 16, Material.GREEN_CONCRETE);
+            chunk.setRegion(0, 255, 0, 16, 256, 16, Material.GREEN_STAINED_GLASS);
 
         } else if ( Bases.BLUE.sameAs(chunkX, chunkZ) ) {
-            chunk.setRegion(1, 0, 0, 16, 2, 16, Material.BLUE_CONCRETE);
-            chunk.setRegion(255, 0, 0, 16, 256, 16, Material.BLUE_STAINED_GLASS);
+            chunk.setRegion(0, 1, 0, 16, 2, 16, Material.BLUE_CONCRETE);
+            chunk.setRegion(0, 255, 0, 16, 256, 16, Material.BLUE_STAINED_GLASS);
 
         } else if ( Bases.YELLOW.sameAs(chunkX, chunkZ) ) {
-            chunk.setRegion(1, 0, 0, 16, 2, 16, Material.YELLOW_CONCRETE);
-            chunk.setRegion(255, 0, 0, 16, 256, 16, Material.YELLOW_STAINED_GLASS);
+            chunk.setRegion(0, 1, 0, 16, 2, 16, Material.YELLOW_CONCRETE);
+            chunk.setRegion(0, 255, 0, 16, 256, 16, Material.YELLOW_STAINED_GLASS);
 
         } else if ( Bases.RED.sameAs(chunkX, chunkZ) ) {
-            chunk.setRegion(1, 0, 0, 16, 2, 16, Material.RED_CONCRETE);
-            chunk.setRegion(255, 0, 0, 16, 256, 16, Material.RED_STAINED_GLASS);
+            chunk.setRegion(0, 1, 0, 16, 2, 16, Material.RED_CONCRETE);
+            chunk.setRegion(0, 255, 0, 16, 256, 16, Material.RED_STAINED_GLASS);
 
         } else {
             // Set Everything to Dirt
