@@ -10,6 +10,10 @@ commands:
     usage: /test <confirmation>
     permission: geem.AllowAll
 
+  updategeem:
+    description: Grab Update from Github
+    usage: /updategeem
+    permission: op
 
 permissions:
   geem.AllowAll:
