@@ -45,6 +45,7 @@ public class CommandHandler implements CommandExecutor {
 
             world.getWorldBorder().setSize(256);
             world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
+//            world.setGameRule(GameRule.RANDOM_TICK_SPEED, 0);
             world.setTime(6000);
 
             if ( sender instanceof Player ) {
@@ -69,6 +70,25 @@ public class CommandHandler implements CommandExecutor {
             } catch (IOException e) {
                 sender.sendMessage(ChatColor.RED + "failll.. D:");
             }
+        } else if ( command.getLabel().equalsIgnoreCase("addplayer") ) {
+            if ( args.length != 2 ) return false;
+
+            switch ( args[0] ) {
+                case "r":
+                    Teams.RED.players.add(Bukkit.getPlayer(args[1]));
+                    break;
+                case "g":
+                    Teams.GREEN.players.add(Bukkit.getPlayer(args[1]));
+                    break;
+                case "b":
+                    Teams.BLUE.players.add(Bukkit.getPlayer(args[1]));
+                    break;
+                case "y":
+                    Teams.YELLOW.players.add(Bukkit.getPlayer(args[1]));
+                    break;
+            }
+
+            return true;
         }
 
         return false;

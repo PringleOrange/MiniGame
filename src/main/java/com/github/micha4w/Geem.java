@@ -6,14 +6,13 @@ public class Geem extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        Bases.BLUE.opposite = Bases.YELLOW;
-        Bases.YELLOW.opposite = Bases.BLUE;
-        Bases.GREEN.opposite = Bases.RED;
-        Bases.RED.opposite = Bases.GREEN;
-
+        Teams.innit();
 
         this.getCommand("test").setExecutor(new CommandHandler());
         this.getCommand("updategeem").setExecutor(new CommandHandler());
+        this.getCommand("addplayer").setExecutor(new CommandHandler());
+
+        this.getServer().getPluginManager().registerEvents(new EventListener(), this);
 
         getLogger().info("Geem!");
     }
@@ -22,5 +21,4 @@ public class Geem extends JavaPlugin {
     public void onDisable() {
         getLogger().info("Geemn't!");
     }
-
 }

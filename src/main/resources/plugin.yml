@@ -15,6 +15,11 @@ commands:
     usage: /updategeem
     permission: op
 
+  addplayer:
+    description: add a player to a game
+    usage: /addplayer <r/g/b/y> <player>
+    permission: op
+
 permissions:
   geem.AllowAll:
     description: Allows a player to do everything
