@@ -2,7 +2,6 @@ package com.github.micha4w;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -25,13 +24,20 @@ public class EventListener implements Listener {
                     return;
                 }
 
-                Block block = new Location(Teams.world,
-                                                16 * killedTeam.opposite.chunkX + Math.abs(killerTeam.chunkX),
-                                                7,
-                                                16 * killedTeam.opposite.chunkZ + Math.abs(killerTeam.chunkZ)
-                                            ).getBlock();
 
-                block.setType(killerTeam.treasureBlock);
+                final int distanceToCorner = 1;
+                Location loc = killedTeam.opposite.getFromCorner(1, 85);
+
+                int addX = Integer.signum(killerTeam.chunkX);
+                int addZ = Integer.signum(killerTeam.chunkZ);
+
+                if ( addX == Integer.signum(killedTeam.opposite.chunkX) )
+                    addX = 0;
+
+                if ( addZ == Integer.signum(killedTeam.opposite.chunkZ) )
+                    addZ = 0;
+
+                loc.add(addX, 0, addZ).getBlock().setType(killerTeam.treasureBlock);
             }
         }
     }

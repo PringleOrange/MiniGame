@@ -45,8 +45,8 @@ public enum Teams {
     }
 
     public static Teams getTeam(Player player) {
-        for ( Teams team : Teams.values() ) {
-            if ( team.players.contains(player) ) {
+        for (Teams team : Teams.values()) {
+            if (team.players.contains(player)) {
                 return team;
             }
         }
@@ -54,9 +54,9 @@ public enum Teams {
     }
 
     public static void endGame() {
-        for ( Teams team : Teams.values() ) {
+        for (Teams team : Teams.values()) {
             team.score = 0;
-            for ( Player player : team.players ) {
+            for (Player player : team.players) {
                 team.removePlayer(player);
             }
         }
@@ -66,7 +66,7 @@ public enum Teams {
         return this.chunkX == chunkX && this.chunkZ == chunkZ;
     }
 
-    public void addPlayer (Player player) {
+    public void addPlayer(Player player) {
         players.add(player);
 
         player.setDisplayName(color + player.getDisplayName());
@@ -83,7 +83,17 @@ public enum Teams {
     public void removePlayer(Player player) {
         players.remove(player);
 
-        player.setDisplayName( player.getDisplayName().substring(color.toString().length()) );
-        player.setPlayerListName( player.getDisplayName() );
+        player.setDisplayName(player.getDisplayName().substring(color.toString().length()));
+        player.setPlayerListName(player.getDisplayName());
+    }
+
+    public Location getFromCorner(double distanceToCorner, double yLevel) {
+        final int signX = Integer.signum(opposite.chunkX);
+        final int signZ = Integer.signum(opposite.chunkZ);
+
+        Chunk chunk = Teams.world.getChunkAt(16 * chunkX, 16 * chunkZ);
+        Location corner = chunk.getBlock(signX % 16, (int) yLevel, signZ % 16).getLocation();
+
+        return corner.add(distanceToCorner * signX, 0, distanceToCorner * signZ);
     }
 }
