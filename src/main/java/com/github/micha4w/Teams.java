@@ -77,7 +77,7 @@ public enum Teams {
     }
 
     public Location getSpawn() {
-        return new Location(world, chunkX * 16 + 7.5, 2, chunkZ * 16 + 7.5);
+        return getFromCorner(6.5, 73);
     }
 
     public void removePlayer(Player player) {
