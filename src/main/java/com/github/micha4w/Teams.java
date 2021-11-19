@@ -88,10 +88,11 @@ public enum Teams {
     }
 
     public Location getFromCorner(double distanceToCorner, double yLevel) {
-        final int signX = Integer.signum(opposite.chunkX);
-        final int signZ = Integer.signum(opposite.chunkZ);
+        final int signX = Integer.signum(chunkX);
+        final int signZ = Integer.signum(chunkZ);
 
         Chunk chunk = Teams.world.getChunkAt(chunkX, chunkZ);
+        Bukkit.getPlayer("micha4w").sendMessage(chunkX + ", " + chunkZ + ": " + chunk);
         Location corner = chunk.getBlock(signX < 0 ? 15 : 0, (int) yLevel, signZ < 0 ? 15 : 0).getLocation();
 
         return corner.add(distanceToCorner * signX, 0, distanceToCorner * signZ);
