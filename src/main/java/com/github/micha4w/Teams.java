@@ -12,7 +12,7 @@ public enum Teams {
     BLUE(-8, 7, ChatColor.BLUE, Material.BLUE_CONCRETE, Material.BLUE_STAINED_GLASS),
     RED(7, 7, ChatColor.RED, Material.RED_CONCRETE, Material.RED_STAINED_GLASS);
 
-    static final World world = Bukkit.getWorld("test2");
+    static final World world = Bukkit.getWorld("minigame");
     static final Location lobby = new Location(Bukkit.getWorld("lobby"), 0, 7, 0);
 
     int chunkX;
@@ -58,6 +58,12 @@ public enum Teams {
                 team.removePlayer(player);
             }
         }
+    }
+
+    public static void prepare() {
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mvdelete minigame");
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mvconfirm");
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mvclone test2 minigame");
     }
 
     public boolean isBaseChunk(int chunkX, int chunkZ) {

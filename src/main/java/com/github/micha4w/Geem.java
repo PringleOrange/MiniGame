@@ -12,6 +12,10 @@ public class Geem extends JavaPlugin {
         this.getCommand("updategeem").setExecutor(new CommandHandler());
         this.getCommand("addplayer").setExecutor(new CommandHandler());
         this.getCommand("removeplayer").setExecutor(new CommandHandler());
+        this.getCommand("prepare").setExecutor(new CommandHandler());
+
+        this.getCommand("addplayer").setTabCompleter(new CommandHandler());
+        this.getCommand("removeplayer").setTabCompleter(new CommandHandler());
 
         this.getServer().getPluginManager().registerEvents(new EventListener(), this);
 

@@ -1,20 +1,27 @@
 package com.github.micha4w;
 
+import com.google.common.collect.ImmutableMap;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
 
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 
-public class CommandHandler implements CommandExecutor {
+public class CommandHandler implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -51,7 +58,6 @@ public class CommandHandler implements CommandExecutor {
                 ((Player) sender).teleport(new Location(world, 0, 100, 0));
             }
 
-            return true;
         } else if ( command.getLabel().equalsIgnoreCase("updategeem") ) {
             {
                 File file = new File("plugins/MiniGame.jar");
@@ -97,7 +103,6 @@ public class CommandHandler implements CommandExecutor {
                     break;
             }
 
-            return true;
         } else if ( command.getLabel().equalsIgnoreCase("removeplayer") ) {
             if ( args.length != 1 ) return false;
 
@@ -110,10 +115,31 @@ public class CommandHandler implements CommandExecutor {
                 sender.sendMessage("Played removed");
             }
 
-            return true;
+        } else if ( command.getLabel().equalsIgnoreCase("prepare") ) {
+            Teams.prepare();
+        } else {
+            return false;
         }
-
-        return false;
+        return true;
     }
 
+    private static final Map<String, String[][]> tabOptions = ImmutableMap.<String, String[][]>builder()
+            .put("removeplayer", new String[][]{{"pleyers"}})
+            .put("addplayer", new String[][]{{"r","g","b","y"},{"pleyers"}})
+            .build();
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+        List<String> completions = new ArrayList<>();
+
+        for ( String option : tabOptions.keySet() ) {
+            if (option.equalsIgnoreCase(label)) {
+                if ( tabOptions.get(option).length < args.length )
+                    StringUtil.copyPartialMatches(args[args.length - 1], Arrays.asList(tabOptions.get(option)[args.length - 1].clone()), completions);
+                break;
+            }
+        }
+
+        return completions;
+    }
 }

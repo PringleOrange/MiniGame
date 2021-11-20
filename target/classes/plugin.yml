@@ -16,12 +16,17 @@ commands:
     permission: geem.allowall
 
   addplayer:
-    description: add a player to a game
+    description: Add a player to geem
     usage: /addplayer <r/g/b/y> <player>
     permission: geem.allowall
 
   removeplayer:
-    description: remove a player from a game
+    description: Remove a player from geem
+    usage: /removeplayer <player>
+    permission: geem.allowall
+
+  prepare:
+    description: Prepare a new world to play geem
     usage: /removeplayer <player>
     permission: geem.allowall
 
