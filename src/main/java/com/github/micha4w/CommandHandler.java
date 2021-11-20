@@ -134,7 +134,11 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
 
         for ( String option : tabOptions.keySet() ) {
             if (option.equalsIgnoreCase(label)) {
-                if ( tabOptions.get(option).length < args.length )
+                String[][] optionsList = tabOptions.get(option);
+                sender.sendMessage(label + optionsList.length + " " + args.length);
+                if ( optionsList.length <= args.length )
+                    sender.sendMessage(args);
+                    sender.sendMessage(optionsList.toString());
                     StringUtil.copyPartialMatches(args[args.length - 1], Arrays.asList(tabOptions.get(option)[args.length - 1].clone()), completions);
                 break;
             }
