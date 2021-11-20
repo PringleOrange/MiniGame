@@ -72,6 +72,8 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
                     fileOutputStream.write(dataBuffer, 0, bytesRead);
                 }
                 sender.sendMessage(ChatColor.GREEN + "Successs!!");
+
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "reload confirm");
             } catch (IOException e) {
                 sender.sendMessage(ChatColor.RED + "failll.. D:");
             }
@@ -138,7 +140,9 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
             if (option.equalsIgnoreCase(label)) {
                 String[][] optionsList = tabOptions.get(option);
                 if ( optionsList.length >= args.length ) {
-                    sender.sendMessage(optionsList.toString());
+                    for ( String[] optiona : optionsList ) {
+                        sender.sendMessage(optiona);
+                    }
                     String[] options = optionsList[args.length - 1];
                     if (Arrays.equals(options, new String[]{"pleyers"}))
                         options = Bukkit.getOnlinePlayers().stream().map(Player::getDisplayName).toArray(String[]::new);
