@@ -132,12 +132,14 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         List<String> completions = new ArrayList<>();
 
+        sender.sendMessage(args);
+
         for ( String option : tabOptions.keySet() ) {
             if (option.equalsIgnoreCase(label)) {
                 String[][] optionsList = tabOptions.get(option);
                 if ( optionsList.length <= args.length ) {
                     String[] options = optionsList[args.length - 1];
-                    if ( options.equals(new String[]{"pleyers"}) )
+                    if (Arrays.equals(options, new String[]{"pleyers"}))
                         options = (String[]) Bukkit.getOnlinePlayers().stream().map(Player::getDisplayName).toArray();
                     StringUtil.copyPartialMatches(args[args.length - 1], Arrays.asList(options.clone()), completions);
                 }
