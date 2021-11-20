@@ -138,6 +138,7 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
             if (option.equalsIgnoreCase(label)) {
                 String[][] optionsList = tabOptions.get(option);
                 if ( optionsList.length >= args.length ) {
+                    sender.sendMessage(optionsList.toString());
                     String[] options = optionsList[args.length - 1];
                     if (Arrays.equals(options, new String[]{"pleyers"}))
                         options = Bukkit.getOnlinePlayers().stream().map(Player::getDisplayName).toArray(String[]::new);
