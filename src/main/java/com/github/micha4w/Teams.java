@@ -13,12 +13,10 @@ public enum Teams {
     RED(7, 7, ChatColor.RED, Material.RED_CONCRETE, Material.RED_STAINED_GLASS);
 
     static final World world = Bukkit.getWorld("test2");
+    static final Location lobby = new Location(Bukkit.getWorld("lobby"), 0, 7, 0);
 
     int chunkX;
     int chunkZ;
-
-    int treasureX;
-    int treasureZ;
 
     int score = 0;
 
@@ -77,7 +75,7 @@ public enum Teams {
     }
 
     public Location getSpawn() {
-        return getFromCorner(6.5, 73);
+        return getFromCorner(6, 73);
     }
 
     public void removePlayer(Player player) {
@@ -85,6 +83,8 @@ public enum Teams {
 
         player.setDisplayName(player.getDisplayName().substring(color.toString().length()));
         player.setPlayerListName(player.getDisplayName());
+
+        player.teleport(lobby);
     }
 
     public Location getFromCorner(double distanceToCorner, double yLevel) {
