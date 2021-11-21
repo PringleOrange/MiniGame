@@ -122,9 +122,7 @@ public enum Teams {
         final int signX = -Integer.signum(chunkX);
         final int signZ = -Integer.signum(chunkZ);
 
-        Bukkit.getPlayer("micha4w").sendMessage(getWorld().toString());
         Chunk chunk = getWorld().getChunkAt(chunkX, chunkZ);
-        Bukkit.getPlayer("micha4w").sendMessage(getWorld().getChunkAt(chunkX, chunkZ).toString());
         Location corner = chunk.getBlock(signX < 0 ? 15 : 0, (int) yLevel, signZ < 0 ? 15 : 0).getLocation();
 
         return corner.add(distanceToCorner * signX, 0, distanceToCorner * signZ);
