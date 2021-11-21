@@ -116,6 +116,7 @@ public enum Teams {
 
         player.getInventory().clear();
         player.teleport(getLobby());
+        player.setBedSpawnLocation(getLobby(), true);
     }
 
     public Location getFromCorner(double distanceToCorner, double yLevel) {
