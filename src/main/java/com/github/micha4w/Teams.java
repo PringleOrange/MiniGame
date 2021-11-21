@@ -134,7 +134,11 @@ public enum Teams {
         this.score.setScore( this.score.getScore() + points );
 
         if ( this.score.getScore() >= 10 ) {
-            Bukkit.broadcastMessage(ChatColor.BOLD +""+ChatColor.DARK_PURPLE+ "Team " + this.color + this.toString().toLowerCase() +ChatColor.DARK_PURPLE+ " has won!");
+            for ( Teams teams : Teams.values() ) {
+                for ( Player player : teams.players ) {
+                    player.sendMessage(ChatColor.BOLD +""+ChatColor.DARK_PURPLE+ "Team " + this.color + this +ChatColor.DARK_PURPLE+ " has won!");
+                }
+            }
 
             Teams.endGame();
         }
