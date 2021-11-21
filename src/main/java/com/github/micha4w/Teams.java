@@ -2,6 +2,10 @@ package com.github.micha4w;
 
 import org.bukkit.*;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Score;
+import org.bukkit.scoreboard.Scoreboard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +18,14 @@ public enum Teams {
 
     static final World world = Bukkit.getWorld("minigame");
     static final Location lobby = new Location(Bukkit.getWorld("lobby"), 0, 7, 0);
+    static final Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+    static final Objective objective = scoreboard.registerNewObjective("scores", "dummy", ChatColor.BOLD + "" + ChatColor.DARK_PURPLE + "Team Scores:");;
 
     int chunkX;
     int chunkZ;
 
-    int score = 0;
+    //int score = 0;
+    Score score;
 
     Material baseBlock;
     Material treasureBlock;
@@ -40,6 +47,18 @@ public enum Teams {
         Teams.YELLOW.opposite = Teams.BLUE;
         Teams.GREEN.opposite = Teams.RED;
         Teams.RED.opposite = Teams.GREEN;
+
+        Teams.BLUE.score = objective.getScore(ChatColor.BLUE + "Blue");
+        Teams.YELLOW.score = objective.getScore(ChatColor.YELLOW + "Yellow");
+        Teams.GREEN.score = objective.getScore(ChatColor.GREEN + "Green");
+        Teams.RED.score = objective.getScore(ChatColor.RED + "Red");
+
+        Teams.BLUE.score.setScore(0);
+        Teams.YELLOW.score.setScore(0);
+        Teams.GREEN.score.setScore(0);
+        Teams.RED.score.setScore(0);
+
+        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
     }
 
     public static Teams getTeam(Player player) {
@@ -53,7 +72,7 @@ public enum Teams {
 
     public static void endGame() {
         for (Teams team : Teams.values()) {
-            team.score = 0;
+            team.score.setScore(0);
             for (Player player : team.players) {
                 team.removePlayer(player);
             }
@@ -76,8 +95,12 @@ public enum Teams {
         player.setDisplayName(color + player.getDisplayName());
         player.setPlayerListName(color + player.getDisplayName());
 
-        player.teleport(this.getSpawn());
         player.setBedSpawnLocation(this.getSpawn(), true);
+        player.setGameMode(GameMode.SURVIVAL);
+        player.getInventory().clear();
+
+        player.teleport(new Location(world, 0, 256, 0));
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Geem.plugin, () -> player.setHealth(0), 1);
     }
 
     public Location getSpawn() {
@@ -89,7 +112,9 @@ public enum Teams {
 
         player.setDisplayName(player.getDisplayName().substring(color.toString().length()));
         player.setPlayerListName(player.getDisplayName());
+        player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
 
+        player.getInventory().clear();
         player.teleport(lobby);
     }
 
@@ -101,5 +126,15 @@ public enum Teams {
         Location corner = chunk.getBlock(signX < 0 ? 15 : 0, (int) yLevel, signZ < 0 ? 15 : 0).getLocation();
 
         return corner.add(distanceToCorner * signX, 0, distanceToCorner * signZ);
+    }
+
+    public void addScore (int points) {
+        this.score.setScore( this.score.getScore() + points );
+
+        if ( this.score.getScore() >= 10 ) {
+            Bukkit.broadcastMessage(ChatColor.BOLD +""+ChatColor.DARK_PURPLE+ "Team " + this.color + this.toString().toLowerCase() +ChatColor.DARK_PURPLE+ " has won!");
+
+            Teams.endGame();
+        }
     }
 }

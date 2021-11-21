@@ -15,10 +15,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class CommandHandler implements CommandExecutor, TabCompleter {
@@ -81,29 +78,38 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
             if ( args.length != 2 ) return false;
 
             Player player = Bukkit.getPlayer(args[1]);
+            if ( player == null ) {
+                sender.sendMessage(ChatColor.DARK_RED+ "Unknown Player");
+                return true;
+            }
+
             if ( Teams.getTeam(player) != null ) {
                 sender.sendMessage("Player is already in a team");
                 return true;
             }
 
+            Teams team;
             switch ( args[0] ) {
                 case "r":
-                    Teams.RED.addPlayer(player);
-                    sender.sendMessage("Played added to team RED");
+                    team = Teams.RED;
                     break;
                 case "g":
-                    Teams.GREEN.addPlayer(player);
-                    sender.sendMessage("Played added to team GREEN");
+                    team = Teams.GREEN;
                     break;
                 case "b":
-                    Teams.BLUE.addPlayer(player);
-                    sender.sendMessage("Played added to team BLUE");
+                    team = Teams.BLUE;
                     break;
                 case "y":
-                    Teams.YELLOW.addPlayer(player);
-                    sender.sendMessage("Played added to team YELLOW");
+                    team = Teams.YELLOW;
                     break;
+                default:
+                    sender.sendMessage(ChatColor.DARK_RED+ "Unknown Team");
+                    return true;
             }
+
+            team.addPlayer(player);
+            sender.sendMessage(ChatColor.DARK_PURPLE+ "Played added to team" + team.color + team.toString().toLowerCase());
+
 
         } else if ( command.getLabel().equalsIgnoreCase("removeplayer") ) {
             if ( args.length != 1 ) return false;
@@ -111,14 +117,15 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
             Player player = Bukkit.getPlayer(args[0]);
             Teams team = Teams.getTeam(player);
             if ( team == null ) {
-                sender.sendMessage("Player is not in a team");
+                sender.sendMessage(ChatColor.DARK_RED+ "Player is not in a team");
             } else {
                 team.removePlayer(player);
-                sender.sendMessage("Played removed");
+                sender.sendMessage(ChatColor.DARK_PURPLE+ "Played removed from team" + team.color + team.toString().toLowerCase());
             }
 
         } else if ( command.getLabel().equalsIgnoreCase("prepare") ) {
             Teams.prepare();
+            sender.sendMessage(ChatColor.DARK_PURPLE+ "Successfully prepared world!");
         } else {
             return false;
         }

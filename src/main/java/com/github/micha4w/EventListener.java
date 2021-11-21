@@ -58,12 +58,7 @@ public class EventListener implements Listener {
 
         if ( team != null ) {
             if ( event.getBlock().getType() == team.treasureBlock ) {
-                team.score += 1;
-                if ( team.score > 10 ) {
-                    Bukkit.broadcastMessage("Team " + team.toString().toLowerCase() + " has won!");
-
-                    Teams.endGame();
-                }
+                team.addScore(1);
 
                 event.setDropItems(false);
                 return;

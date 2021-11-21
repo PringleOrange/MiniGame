@@ -4,8 +4,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Geem extends JavaPlugin {
 
+    public static Geem plugin;
+
     @Override
     public void onEnable() {
+        plugin = this;
+
         Teams.innit();
 
         this.getCommand("test").setExecutor(new CommandHandler());
