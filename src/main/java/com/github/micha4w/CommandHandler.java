@@ -111,9 +111,12 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
                     return true;
             }
 
-            team.addPlayer(player);
-            sender.sendMessage(ChatColor.DARK_PURPLE+ "Played added to team " + team.color + team);
-
+            if ( Teams.getWorld() == null ) {
+                sender.sendMessage(ChatColor.DARK_RED + "World has not been prepared yet!");
+            } else {
+                team.addPlayer(player);
+                sender.sendMessage(ChatColor.DARK_PURPLE + "Played added to team " + team.color + team);
+            }
 
         } else if ( command.getLabel().equalsIgnoreCase("removeplayer") ) {
             if ( args.length != 1 ) return false;

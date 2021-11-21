@@ -16,10 +16,8 @@ public enum Teams {
     BLUE(-8, 7, ChatColor.BLUE, Material.BLUE_CONCRETE, Material.BLUE_STAINED_GLASS),
     RED(7, 7, ChatColor.RED, Material.RED_CONCRETE, Material.RED_STAINED_GLASS);
 
-    static final World world = Bukkit.getWorld("minigame");
-    static final Location lobby = new Location(Bukkit.getWorld("lobby"), 0, 7, 0);
     static final Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
-    static final Objective objective = scoreboard.registerNewObjective("scores", "dummy", ChatColor.BOLD + "" + ChatColor.DARK_PURPLE + "Team Scores:");;
+    static final Objective objective = scoreboard.registerNewObjective("scores", "dummy", ChatColor.DARK_PURPLE+""+ChatColor.BOLD+ "Team Scores:");;
 
     int chunkX;
     int chunkZ;
@@ -99,15 +97,15 @@ public enum Teams {
         player.setGameMode(GameMode.SURVIVAL);
         player.getInventory().clear();
 
-        player.teleport(new Location(world, 0, 256, 0));
+        player.teleport(new Location(getWorld(), 0, 256, 0));
         Bukkit.getScheduler().scheduleSyncDelayedTask(Geem.plugin, () -> player.setHealth(0), 1);
 
         player.setScoreboard(scoreboard);
     }
 
-    public Location getSpawn() {
-        return getFromCorner(6, 73);
-    }
+    public Location getSpawn() { return getFromCorner(6, 73); }
+    public static World getWorld() { return Bukkit.getWorld("minigame"); }
+    public static Location getLobby() { return new Location(Bukkit.getWorld("lobby"), 0, 7, 0); }
 
     public void removePlayer(Player player) {
         players.remove(player);
@@ -117,14 +115,14 @@ public enum Teams {
         player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
 
         player.getInventory().clear();
-        player.teleport(lobby);
+        player.teleport(getLobby());
     }
 
     public Location getFromCorner(double distanceToCorner, double yLevel) {
         final int signX = -Integer.signum(chunkX);
         final int signZ = -Integer.signum(chunkZ);
 
-        Chunk chunk = Teams.world.getChunkAt(chunkX, chunkZ);
+        Chunk chunk = getWorld().getChunkAt(chunkX, chunkZ);
         Location corner = chunk.getBlock(signX < 0 ? 15 : 0, (int) yLevel, signZ < 0 ? 15 : 0).getLocation();
 
         return corner.add(distanceToCorner * signX, 0, distanceToCorner * signZ);
