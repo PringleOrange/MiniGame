@@ -10,12 +10,12 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 
 public class CommandHandler implements CommandExecutor, TabCompleter {
@@ -69,8 +69,12 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
                     fileOutputStream.write(dataBuffer, 0, bytesRead);
                 }
                 sender.sendMessage(ChatColor.GREEN + "Successs!!");
+                URL url = new URL("jar:file:plugins/MiniGame.jar!/plugin.yml");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+                reader.readLine();
+                sender.sendMessage(reader.readLine());
 
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "reload confirm");
+//                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "reload confirm");
             } catch (IOException e) {
                 sender.sendMessage(ChatColor.RED + "failll.. D:");
             }
