@@ -101,6 +101,8 @@ public enum Teams {
 
         player.teleport(new Location(world, 0, 256, 0));
         Bukkit.getScheduler().scheduleSyncDelayedTask(Geem.plugin, () -> player.setHealth(0), 1);
+
+        player.setScoreboard(scoreboard);
     }
 
     public Location getSpawn() {

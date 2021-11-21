@@ -108,19 +108,24 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
             }
 
             team.addPlayer(player);
-            sender.sendMessage(ChatColor.DARK_PURPLE+ "Played added to team" + team.color + team.toString().toLowerCase());
+            sender.sendMessage(ChatColor.DARK_PURPLE+ "Played added to team " + team.color + team);
 
 
         } else if ( command.getLabel().equalsIgnoreCase("removeplayer") ) {
             if ( args.length != 1 ) return false;
 
             Player player = Bukkit.getPlayer(args[0]);
+            if ( player == null ) {
+                sender.sendMessage(ChatColor.DARK_RED+ "Unknown Player");
+                return true;
+            }
+
             Teams team = Teams.getTeam(player);
             if ( team == null ) {
                 sender.sendMessage(ChatColor.DARK_RED+ "Player is not in a team");
             } else {
                 team.removePlayer(player);
-                sender.sendMessage(ChatColor.DARK_PURPLE+ "Played removed from team" + team.color + team.toString().toLowerCase());
+                sender.sendMessage(ChatColor.DARK_PURPLE+ "Played removed from team " + team.color + team);
             }
 
         } else if ( command.getLabel().equalsIgnoreCase("prepare") ) {
