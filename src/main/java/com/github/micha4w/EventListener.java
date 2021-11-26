@@ -8,16 +8,20 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class EventListener implements Listener {
     @EventHandler
     public void onPlayerKill (PlayerDeathEvent event) {
         Player player = event.getEntity();
-        Player killer = player.getKiller();
-        if ( killer != null ) {
-            Teams killedTeam = Teams.getTeam(player);
 
-            if ( killedTeam != null ) {
+        Teams killedTeam = Teams.getTeam(player);
+        if ( killedTeam != null ) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 1, false, false, false));
+
+            Player killer = player.getKiller();
+            if ( killer != null ) {
                 Teams killerTeam = Teams.getTeam(killer);
                 if ( killerTeam == null ) {
                     Bukkit.getLogger().info("Somehow somebody not inside a game killed someone inside a game, pls fix");
