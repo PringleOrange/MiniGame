@@ -2,6 +2,8 @@ package com.github.micha4w;
 
 import org.bukkit.*;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
@@ -96,6 +98,7 @@ public enum Teams {
         player.setBedSpawnLocation(this.getSpawn(), true);
         player.setGameMode(GameMode.SURVIVAL);
         player.getInventory().clear();
+        player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 1, false, false, false));
 
         player.teleport(new Location(getWorld(), 0, 256, 0));
         Bukkit.getScheduler().scheduleSyncDelayedTask(Geem.plugin, () -> player.setHealth(0), 1);
@@ -114,6 +117,7 @@ public enum Teams {
         player.setPlayerListName(player.getDisplayName());
         player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
 
+        player.removePotionEffect(PotionEffectType.NIGHT_VISION);
         player.getInventory().clear();
         player.teleport(getLobby());
         player.setBedSpawnLocation(getLobby(), true);
