@@ -1,7 +1,7 @@
 name: Geem
 version: 1.3.3
 main: com.github.micha4w.Geem
-author: micha4w
+author: PringleOrange
 description: Geem, that's all
 api-version: 1.17
 commands:
